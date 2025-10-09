@@ -1,22 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
-gcd(int a,int b)
+#define SIZE 5
+struct stack
+{ int top;
+int data[SIZE];
+};
+typedef struct stack STACK;
+void push(STACK *s,int item)
 {
-     if (a==b)
-        return a;
-     else if(a>b)
-     {
-         return gcd(a-b,b);
-     }
-     else {
-        return gcd(b,a);
-     }
+    if(s->top==SIZE-1)
+        printf("\n stack overflow");
+    else
+    {
+        s->top=s->top+1;
+        s->data[s->top]=item;
+    }
 }
+void pop(STACK *s)
+{
+    if(s->top==-1)
+        printf("\n stack overflow");
+    else
+    {
+        printf("\n element poped is %d",s->data[s->top]);
+        s->top=s->top-1;
+    }
+}
+void display(STACK s)
+{
+    int i;
+    if(s.top==-1)
+        printf("\n stack is empty");
+    else
+    {
+        printf("\n stack contents are \n");
+        for(i=s.top;i>=0;i--)
+        printf("%d\n",s.data[i]);
+}
+}
+
+
+
 int main()
 {
-    int a,b;
-    printf("\n read values for a &b:");
-    scanf("%d%d",&a,&b);
-    printf("\n gcd of %d and %d is %d\n",a,b,gcd(a,b));
+    int ch,item;
+    STACK s;
+    s.top=-1;
+    for(;;)
+    {
+        printf("\n 1. push");
+        printf("\n 2 pop");
+        printf("\n 3 display");
+        printf("\n 4. exit");
+        printf("\n read a choice");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf ("\n read element:");
+            scanf("%d",&item);
+            push(&s,item);
+            break;
+            case 2:pop(&s);
+            break;
+            case 3:display(s);
+           break;
+            default:exit(0);
+
+        }
+    }
     return 0;
 }
